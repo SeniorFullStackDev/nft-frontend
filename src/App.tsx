@@ -1,26 +1,54 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from 'redux/store';
+import { PATHS } from 'constants/routes';
+import history from 'redux/history';
+
+// layout
+import ContentLayout from 'layouts/ContentLayout';
+import EmptyLayout from 'layouts/EmptyLayout';
+
+// pages
+import ConnectWallet from 'pages/connectWallet';
+import Profile from 'pages/profile';
+
+import PrivateRoute from 'layouts/PrivateRoute';
 
 function App() {
+  const renderWithLayout = (Component, Layout) => <Layout>{Component}</Layout>;
+  const RedirectRoute = (rest) => (
+    <Redirect push to={{ pathname: PATHS.PROFILE, state: { from: rest.location } }} />
+  );
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit
-          <code>src/App.tsx</code>
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Provider store={store}>
+        <div className="App">
+          <Router history={history}>
+            <div>
+              <Switch>
+                <RedirectRoute
+                  path={PATHS.HOME}
+                  exact
+                  render={() => renderWithLayout(<></>, ContentLayout)}
+                />
+                <Route
+                  path={PATHS.WALLET_CONNECT}
+                  exact
+                  render={() => renderWithLayout(<ConnectWallet />, ContentLayout)}
+                />
+                <PrivateRoute
+                  path={PATHS.PROFILE}
+                  exact
+                  render={() => renderWithLayout(<Profile />, ContentLayout)}
+                />
+              </Switch>
+            </div>
+          </Router>
+
+        </div>
+      </Provider>
     </div>
   );
 }
