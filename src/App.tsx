@@ -13,6 +13,9 @@ import EmptyLayout from 'layouts/EmptyLayout';
 import ConnectWallet from 'pages/connectWallet';
 import Profile from 'pages/profile';
 
+// theme
+import { CustomTheme } from 'theme';
+
 import PrivateRoute from 'layouts/PrivateRoute';
 
 function App() {
@@ -24,30 +27,32 @@ function App() {
   return (
     <div className="App">
       <Provider store={store}>
-        <div className="App">
-          <Router history={history}>
-            <div>
-              <Switch>
-                <RedirectRoute
-                  path={PATHS.HOME}
-                  exact
-                  render={() => renderWithLayout(<></>, ContentLayout)}
-                />
-                <Route
-                  path={PATHS.WALLET_CONNECT}
-                  exact
-                  render={() => renderWithLayout(<ConnectWallet />, ContentLayout)}
-                />
-                <PrivateRoute
-                  path={PATHS.PROFILE}
-                  exact
-                  render={() => renderWithLayout(<Profile />, ContentLayout)}
-                />
-              </Switch>
-            </div>
-          </Router>
+        <CustomTheme>
+          <div className="App">
+            <Router history={history}>
+              <div>
+                <Switch>
+                  <RedirectRoute
+                    path={PATHS.HOME}
+                    exact
+                    render={() => renderWithLayout(<></>, ContentLayout)}
+                  />
+                  <Route
+                    path={PATHS.WALLET_CONNECT}
+                    exact
+                    render={() => renderWithLayout(<ConnectWallet />, ContentLayout)}
+                  />
+                  <PrivateRoute
+                    path={PATHS.PROFILE}
+                    exact
+                    render={() => renderWithLayout(<Profile />, ContentLayout)}
+                  />
+                </Switch>
+              </div>
+            </Router>
 
-        </div>
+          </div>
+        </CustomTheme>
       </Provider>
     </div>
   );

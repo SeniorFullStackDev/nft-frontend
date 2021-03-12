@@ -1,24 +1,24 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import * as authAction from './wallet.action';
+import * as walletAction from './wallet.action';
 
 const useWallet = () => {
   const dispatch = useDispatch();
 
-  const onSignin = useCallback(
-    (paload) => {
-      dispatch(authAction.signInRequestSaga(paload));
+  const requestSign = useCallback(
+    () => {
+      dispatch(walletAction.signInRequestSaga());
     },
     [dispatch],
   );
 
   const connectWallet = useCallback(
-    (paload) => {
-      dispatch(authAction.signInRequestSaga(paload));
+    () => {
+      dispatch(walletAction.connectWalletSaga());
     },
     [dispatch],
   );
-  return { connectWallet, onSignin };
+  return { connectWallet, requestSign };
 };
 
 export default useWallet;
