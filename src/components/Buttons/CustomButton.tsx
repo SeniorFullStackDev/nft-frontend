@@ -1,14 +1,8 @@
 import React from 'react';
 import {
-  createMuiTheme,
-  createStyles,
   withStyles,
-  makeStyles,
-  Theme,
-  ThemeProvider,
 } from '@material-ui/core/styles';
 import Button, { ButtonClassKey, ButtonProps } from '@material-ui/core/Button';
-import { purple } from '@material-ui/core/colors';
 
 interface Styles extends Partial<Record<ButtonClassKey, string>> {
   backgroundColor?: string;
@@ -27,6 +21,19 @@ const CustomButton = withStyles(({ custom }) =>
       color: custom.colors.button.primary.text,
       padding: '8.5px',
       borderColor: custom.colors.button.primary.background,
+      '&:hover': {
+        backgroundColor: '#0069d9',
+        borderColor: '#0062cc',
+        boxShadow: 'none',
+      },
+      '&:active': {
+        boxShadow: 'none',
+        backgroundColor: '#0062cc',
+        borderColor: '#005cbf',
+      },
+      '&:focus': {
+        // boxShadow: '0 0 0 0.2rem rgba(0,123,255,.5)',
+      },
     },
   }),
 )(({ classes, ...props }: Props) => (

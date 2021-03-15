@@ -1,9 +1,11 @@
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as walletAction from './wallet.action';
 
 const useWallet = () => {
   const dispatch = useDispatch();
+
+  const wallet = useSelector((state: any) => state.walletReducer);
 
   const requestSign = useCallback(
     () => {
@@ -18,7 +20,7 @@ const useWallet = () => {
     },
     [dispatch],
   );
-  return { connectWallet, requestSign };
+  return { wallet, connectWallet, requestSign };
 };
 
 export default useWallet;
