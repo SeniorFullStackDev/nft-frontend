@@ -26,8 +26,9 @@ import {
 import { TransitionProps } from '@material-ui/core/transitions';
 import { Form, Field } from 'react-final-form';
 import { TextField, Checkbox, Radio, Select } from 'final-form-material-ui';
-
 import CustomButton from 'components/Buttons/CustomButton';
+import LogoUploader from 'components/LogoUploader';
+
 import { useStyle } from './style';
 
 const Transition = React.forwardRef((
@@ -86,6 +87,9 @@ export default function CreateNFTDialog({ open, onClose }:Props) {
           render={({ handleSubmit, reset, submitting, pristine, values }:any) => (
             <form onSubmit={handleSubmit} noValidate>
               <Grid container alignItems="flex-start" spacing={2}>
+                <Grid item xs={12}>
+                  <LogoUploader />
+                </Grid>
                 <Grid item xs={12}>
                   <Field
                     fullWidth
