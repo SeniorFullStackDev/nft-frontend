@@ -89,7 +89,7 @@ export const uploadRequest = (formData:FormData) =>
 
   new Promise((resolve, reject) =>
     superAgent
-      .post(`${config.baseURL}/upload`)
+      .post(`${config.baseURL}/upload/file`)
       .send(formData)
       .use(ErrorIntercept)
       .set({
