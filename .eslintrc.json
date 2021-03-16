@@ -48,6 +48,7 @@
         "jsx-a11y/anchor-is-valid": 0,
         "no-restricted-syntax":"off",
         "semi": ["error", "always"],
-        "quotes": ["error", "single"]
+        "quotes": ["error", "single"],
+        "@typescript-eslint/naming-convention":"off"
     }
 }

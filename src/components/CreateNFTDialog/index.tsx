@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Typography,
   Button,
@@ -29,6 +29,7 @@ import { TextField, Checkbox, Radio, Select } from 'final-form-material-ui';
 import CustomButton from 'components/Buttons/CustomButton';
 import LogoUploader from 'components/LogoUploader';
 
+import { createNFT } from 'api/api';
 import { useStyle } from './style';
 
 const Transition = React.forwardRef((
@@ -43,10 +44,8 @@ interface Props {
 
 export default function CreateNFTDialog({ open, onClose }:Props) {
   const classes = useStyle();
-  const [name, setName] = React.useState('Composed TextField');
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value);
-  };
+  const [tokenLogo, setTokenLogo] = useState('');
+
   const handleClose = () => {
     onClose();
   };
@@ -54,7 +53,11 @@ export default function CreateNFTDialog({ open, onClose }:Props) {
   const onSubmit = async (values) => {
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     await sleep(300);
-    window.alert(JSON.stringify(values));
+    createNFT({ token_logo: tokenLogo, ...values })
+      .then((res:any) => {
+        console.log('createNFT ---->', res.body.data);
+      })
+      .catch((e) => { console.log(e.message); });
   };
   const validate = (values) => {
     const errors:any = {};
@@ -82,13 +85,13 @@ export default function CreateNFTDialog({ open, onClose }:Props) {
       <DialogContent className={classes.formContent}>
         <Form
           onSubmit={onSubmit}
-          initialValues={{ employed: true, stooge: 'larry' }}
+          initialValues={{ token_name: '', token_description: '' }}
           validate={validate}
           render={({ handleSubmit, reset, submitting, pristine, values }:any) => (
             <form onSubmit={handleSubmit} noValidate>
               <Grid container alignItems="flex-start" spacing={2}>
                 <Grid item xs={12}>
-                  <LogoUploader />
+                  <LogoUploader onChangeFile={(logo) => setTokenLogo(logo)} />
                 </Grid>
                 <Grid item xs={12}>
                   <Field
@@ -103,7 +106,7 @@ export default function CreateNFTDialog({ open, onClose }:Props) {
                 <Grid item xs={12}>
                   <Field
                     fullWidth
-                    name="description"
+                    name="token_description"
                     component={TextField}
                     multiline
                     label="Description"

@@ -18,6 +18,7 @@ export const useStyle = makeStyles(() =>
     imageReactContainer: {
       width: '100%',
       height: '100%',
+      position: 'relative',
       '& img': {
         width: '100%',
         height: '100%',
@@ -28,9 +29,11 @@ export const useStyle = makeStyles(() =>
       alignItems: 'center',
       display: 'flex',
       height: '100%',
+      width: '100%',
+      top: 0,
       '-webkit-box-pack': 'center',
       justifyContent: 'center',
-      position: 'relative',
+      position: 'absolute',
       '& span': {
         fontSize: 64,
         color: '#ccc',
