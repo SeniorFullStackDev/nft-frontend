@@ -9,12 +9,8 @@ import { useStyle } from './style';
 const CollectionPage = () => {
   const classes = useStyle();
   const [openDialog, setOpenDialog] = useState<boolean>(false);
-  const { wallet, getNFTList } = useWallet();
-  console.log('wallet -->', wallet);
+  const { wallet } = useWallet();
 
-  useEffect(() => {
-    getNFTList();
-  }, [openDialog]);
   return (
     <Grid>
       <h1>Collection Page</h1>

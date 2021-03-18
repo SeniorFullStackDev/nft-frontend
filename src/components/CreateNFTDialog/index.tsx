@@ -28,6 +28,7 @@ import { Form, Field } from 'react-final-form';
 import { TextField, Checkbox, Radio, Select } from 'final-form-material-ui';
 import CustomButton from 'components/Buttons/CustomButton';
 import LogoUploader from 'components/LogoUploader';
+import useWallet from 'redux/wallet/wallet.hook';
 
 import { createNFT } from 'api/api';
 import { useStyle } from './style';
@@ -44,6 +45,7 @@ interface Props {
 
 export default function CreateNFTDialog({ open, onClose }:Props) {
   const classes = useStyle();
+  const { getNFTList } = useWallet();
   const [tokenLogo, setTokenLogo] = useState('');
 
   const handleClose = () => {
@@ -55,6 +57,7 @@ export default function CreateNFTDialog({ open, onClose }:Props) {
     await sleep(300);
     createNFT({ token_logo: tokenLogo, ...values })
       .then((res:any) => {
+        getNFTList();
         onClose();
       })
       .catch((e) => { console.log(e.message); });
