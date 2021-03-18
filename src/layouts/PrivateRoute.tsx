@@ -7,7 +7,7 @@ const PrivateRoute = (rest) => {
   const { wallet } = useWallet();
   const isAuthenticated = localStorage.getItem('auth_token') || false;
 
-  if (isAuthenticated) {
+  if (wallet.account) {
     return (<Route {...rest} />);
   }
 
