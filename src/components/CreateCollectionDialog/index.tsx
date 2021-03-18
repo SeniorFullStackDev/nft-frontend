@@ -30,7 +30,7 @@ import CustomButton from 'components/Buttons/CustomButton';
 import LogoUploader from 'components/LogoUploader';
 import useWallet from 'redux/wallet/wallet.hook';
 
-import { createNFT } from 'api/api';
+import { createCollection } from 'api/api';
 import { useStyle } from './style';
 
 const Transition = React.forwardRef((
@@ -43,10 +43,10 @@ interface Props {
   onClose: ()=>void;
 }
 
-export default function CreateNFTDialog({ open, onClose }:Props) {
+export default function CreateCollectionDialog({ open, onClose }:Props) {
   const classes = useStyle();
-  const { getNFTList } = useWallet();
-  const [tokenLogo, setTokenLogo] = useState('');
+  const { getCollections } = useWallet();
+  const [collectionLogo, setCollectionLogo] = useState('');
 
   const handleClose = () => {
     onClose();
@@ -55,17 +55,17 @@ export default function CreateNFTDialog({ open, onClose }:Props) {
   const onSubmit = async (values) => {
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     await sleep(300);
-    createNFT({ token_logo: tokenLogo, ...values })
+    createCollection({ collection_logo: collectionLogo, ...values })
       .then((res:any) => {
-        getNFTList();
+        getCollections();
         onClose();
       })
       .catch((e) => { console.log(e.message); });
   };
   const validate = (values) => {
     const errors:any = {};
-    if (!values.token_name) {
-      errors.token_name = 'Required';
+    if (!values.collection_name) {
+      errors.collection_name = 'Required';
     }
     return errors;
   };
@@ -88,19 +88,19 @@ export default function CreateNFTDialog({ open, onClose }:Props) {
       <DialogContent className={classes.formContent}>
         <Form
           onSubmit={onSubmit}
-          initialValues={{ token_name: '', token_description: '' }}
+          initialValues={{ collection_name: '', collection_description: '' }}
           validate={validate}
           render={({ handleSubmit, reset, submitting, pristine, values }:any) => (
             <form onSubmit={handleSubmit} noValidate>
               <Grid container alignItems="flex-start" spacing={2}>
                 <Grid item xs={12}>
-                  <LogoUploader onChangeFile={(logo) => setTokenLogo(logo)} />
+                  <LogoUploader onChangeFile={(logo) => setCollectionLogo(logo)} />
                 </Grid>
                 <Grid item xs={12}>
                   <Field
                     fullWidth
                     required
-                    name="token_name"
+                    name="collection_name"
                     component={TextField}
                     type="text"
                     label="Name"
@@ -109,7 +109,7 @@ export default function CreateNFTDialog({ open, onClose }:Props) {
                 <Grid item xs={12}>
                   <Field
                     fullWidth
-                    name="token_description"
+                    name="collection_description"
                     component={TextField}
                     multiline
                     label="Description"

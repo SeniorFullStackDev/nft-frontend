@@ -1,10 +1,10 @@
-import { NFTType } from 'helpers/types';
+import { CollectionType } from 'helpers/types';
 import { createReducer } from 'redux-act';
 import * as actions from './wallet.action';
 
 const initialState = {
   account: undefined,
-  nftList: [],
+  collections: [],
 };
 
 const reducer:any = {
@@ -12,9 +12,9 @@ const reducer:any = {
     const { account } = data;
     return { ...state, account };
   },
-  [actions.setNFTList]: (state: any, data: { list: NFTType[] }) => {
-    const { list } = data;
-    return { ...state, nftList: list };
+  [actions.setCollections]: (state: any, data: { collections: CollectionType[] }) => {
+    const { collections } = data;
+    return { ...state, collections };
   },
 };
 

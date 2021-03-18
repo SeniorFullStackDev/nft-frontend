@@ -21,14 +21,14 @@ const useWallet = () => {
     [dispatch],
   );
 
-  const getNFTList = useCallback(
+  const getCollections = useCallback(
     () => {
-      dispatch(walletAction.getNFTListSaga());
+      dispatch(walletAction.getCollectionsSaga());
     },
     [dispatch],
   );
 
-  return { wallet, connectWallet, requestSign, getNFTList };
+  return { wallet, connectWallet, requestSign, getCollections };
 };
 
 export default useWallet;

@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Grid, Card, CardContent, Button, Typography, CardActions } from '@material-ui/core';
 import CustomButton from 'components/Buttons/CustomButton';
-import CreateNFTDialog from 'components/CreateNFTDialog';
-import NFTCard from 'components/NFTCard';
+import CreateCollectionDialog from 'components/CreateCollectionDialog';
+import CollectoinCard from 'components/CollectoinCard';
 import useWallet from 'redux/wallet/wallet.hook';
 import { useStyle } from './style';
 
 const CollectionPage = () => {
   const classes = useStyle();
   const [openDialog, setOpenDialog] = useState<boolean>(false);
-  const { wallet } = useWallet();
+  const { wallet, getCollections } = useWallet();
+
+  useEffect(() => {
+    getCollections();
+  }, []);
 
   return (
     <Grid>
@@ -28,10 +32,10 @@ const CollectionPage = () => {
           </Card>
         </Grid>
         {
-        wallet.nftList.map((item, index) => <Grid item><NFTCard data={item} /></Grid>)
-      }
+          wallet.collections.map((item, index) => <Grid item><CollectoinCard data={item} /></Grid>)
+        }
 
-        <CreateNFTDialog open={openDialog} onClose={() => { setOpenDialog(false); }} />
+        <CreateCollectionDialog open={openDialog} onClose={() => { setOpenDialog(false); }} />
       </Grid>
     </Grid>
   );

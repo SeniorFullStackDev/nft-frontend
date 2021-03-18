@@ -1,28 +1,28 @@
 import React, { useState } from 'react';
 import { Grid, Card, CardContent, Button, Typography, CardActions, CardMedia } from '@material-ui/core';
 import CustomButton from 'components/Buttons/CustomButton';
-import CreateNFTDialog from 'components/CreateNFTDialog';
-import { NFTType } from 'helpers/types';
+import CreateNFTDialog from 'components/CreateCollectionDialog';
+import { CollectionType } from 'helpers/types';
 import { useStyle } from './style';
 
 interface Props {
-  data: NFTType
+  data: CollectionType
 }
-const NFTCard = ({ data }:Props) => {
+const CollectoinCard = ({ data }:Props) => {
   const classes = useStyle();
-  const { token_logo, token_name, token_description } = data;
+  const { collection_logo, collection_name, collection_description } = data;
   return (
     <Card className={classes.root}>
       <CardContent>
         <CardMedia
           className={classes.media}
-          image={token_logo}
-          title={token_name}
+          image={collection_logo}
+          title={collection_name}
         />
-        {token_name}
+        {collection_name}
       </CardContent>
     </Card>
   );
 };
 
-export default NFTCard;
+export default CollectoinCard;

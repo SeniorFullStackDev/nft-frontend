@@ -11,20 +11,15 @@ function* connectWallet(data: any) {
 
   const signRes = yield call(API.signInRequest, { account });
   localStore.setToken(signRes.body.token);
-
-  const nftRes = yield call(API.getNFTList);
-  yield put(actions.setNFTList(nftRes.body.list));
-  console.log('nftRes --->', nftRes.body.list);
 }
 
-function* getNFTList(data: any) {
-  const nftRes = yield call(API.getNFTList);
-  yield put(actions.setNFTList(nftRes.body.list));
-  console.log('nftRes --->', nftRes.body.list);
+function* getCollections(data: any) {
+  const colecRes = yield call(API.getCollections);
+  yield put(actions.setCollections(colecRes.body.collections));
 }
 
 export default function* watchAuthSaga() {
   // yield takeEvery(actions.signInRequestSaga, signInRequest);
   yield takeEvery(actions.connectWalletSaga, connectWallet);
-  yield takeEvery(actions.getNFTListSaga, getNFTList);
+  yield takeEvery(actions.getCollectionsSaga, getCollections);
 }

@@ -1,7 +1,7 @@
-export interface NFTType {
-  token_logo:string,
-  token_name:string,
-  token_description:string
+export interface CollectionType {
+  collection_logo:string,
+  collection_name:string,
+  collection_description:string
 }
 
 export interface User {

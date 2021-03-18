@@ -5,9 +5,9 @@ import useWallet from 'redux/wallet/wallet.hook';
 
 const PrivateRoute = (rest) => {
   const { wallet } = useWallet();
-  const isAuthenticated = localStorage.getItem('connected') || false;
+  const isAuthenticated = localStorage.getItem('auth_token') || false;
 
-  if (wallet.account) {
+  if (isAuthenticated) {
     return (<Route {...rest} />);
   }
 
