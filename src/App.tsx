@@ -22,7 +22,7 @@ import PrivateRoute from 'layouts/PrivateRoute';
 function App() {
   const renderWithLayout = (Component, Layout) => <Layout>{Component}</Layout>;
   const RedirectRoute = (rest) => (
-    <Redirect push to={{ pathname: PATHS.PROFILE, state: { from: rest.location } }} />
+    <Redirect push to={{ pathname: PATHS.COLLECTIONS, state: { from: rest.location } }} />
   );
 
   return (
