@@ -11,3 +11,4 @@ export const uploadFile = (file:any) => {
 export const createCollection = (collectionData: CollectionType) => postRequest(`${config.baseURL}/collections/create`, collectionData);
 export const signInRequest = (account: User) => putRequest(`${config.baseURL}/auth/signIn`, account);
 export const getCollections = () => getRequest(`${config.baseURL}/collections/all`);
+export const getCollectionDetail = (payload) => getRequest(`${config.baseURL}/collections/detail?collection_id=${payload}`);

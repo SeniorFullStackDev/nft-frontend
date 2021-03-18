@@ -3,6 +3,8 @@ import { Grid, Card, CardContent, Button, Typography, CardActions, CardMedia } f
 import CustomButton from 'components/Buttons/CustomButton';
 import CreateNFTDialog from 'components/CreateCollectionDialog';
 import { CollectionType } from 'helpers/types';
+import history from 'redux/history';
+import { PATHS } from 'constants/routes';
 import { useStyle } from './style';
 
 interface Props {
@@ -10,9 +12,12 @@ interface Props {
 }
 const CollectoinCard = ({ data }:Props) => {
   const classes = useStyle();
-  const { collection_logo, collection_name, collection_description } = data;
+  const { _id, collection_logo, collection_name, collection_description } = data;
+  const onClickCard = () => {
+    history.push(`${PATHS.COLLECTIONS}/${_id}`);
+  };
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} onClick={onClickCard}>
       <CardContent>
         <CardMedia
           className={classes.media}

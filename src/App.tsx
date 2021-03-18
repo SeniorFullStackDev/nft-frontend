@@ -13,6 +13,7 @@ import EmptyLayout from 'layouts/EmptyLayout';
 import ConnectWallet from 'pages/connectWallet';
 import Profile from 'pages/profile';
 import Collections from 'pages/collections';
+import CollectionDetail from 'pages/collectionDetail';
 
 // theme
 import { CustomTheme } from 'theme';
@@ -53,6 +54,12 @@ function App() {
                     path={PATHS.COLLECTIONS}
                     exact
                     render={() => renderWithLayout(<Collections />, ContentLayout)}
+                  />
+
+                  <PrivateRoute
+                    path={`${PATHS.COLLECTIONS}/:collectonId`}
+                    exact
+                    render={() => renderWithLayout(<CollectionDetail />, ContentLayout)}
                   />
 
                 </Switch>

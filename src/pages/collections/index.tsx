@@ -12,8 +12,10 @@ const CollectionPage = () => {
   const { wallet, getCollections } = useWallet();
 
   useEffect(() => {
-    getCollections();
-  }, []);
+    if (wallet.account) {
+      getCollections();
+    }
+  }, [wallet.account]);
 
   return (
     <Grid>

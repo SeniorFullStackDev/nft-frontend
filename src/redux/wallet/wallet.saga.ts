@@ -7,10 +7,11 @@ import * as actions from './wallet.action';
 
 function* connectWallet(data: any) {
   const account: any = yield walletClient.connectWallet();
-  yield put(actions.setAccount(account));
-
   const signRes = yield call(API.signInRequest, { account });
+  console.log('signRes -->', signRes.body);
   localStore.setToken(signRes.body.token);
+
+  yield put(actions.setAccount(account));
 }
 
 function* getCollections(data: any) {
