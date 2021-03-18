@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Grid, Card, CardContent, Button, Typography, CardActions } from '@material-ui/core';
 import CustomButton from 'components/Buttons/CustomButton';
 import CreateNFTDialog from 'components/CreateNFTDialog';
@@ -9,8 +9,12 @@ import { useStyle } from './style';
 const CollectionPage = () => {
   const classes = useStyle();
   const [openDialog, setOpenDialog] = useState<boolean>(false);
-  const { wallet } = useWallet();
+  const { wallet, getNFTList } = useWallet();
   console.log('wallet -->', wallet);
+
+  useEffect(() => {
+    getNFTList();
+  }, [openDialog]);
   return (
     <Grid>
       <h1>Collection Page</h1>

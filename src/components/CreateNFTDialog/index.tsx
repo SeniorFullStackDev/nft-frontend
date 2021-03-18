@@ -55,7 +55,7 @@ export default function CreateNFTDialog({ open, onClose }:Props) {
     await sleep(300);
     createNFT({ token_logo: tokenLogo, ...values })
       .then((res:any) => {
-        console.log('createNFT ---->', res.body.data);
+        onClose();
       })
       .catch((e) => { console.log(e.message); });
   };
