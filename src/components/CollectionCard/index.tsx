@@ -10,7 +10,7 @@ import { useStyle } from './style';
 interface Props {
   data: CollectionType
 }
-const CollectoinCard = ({ data }:Props) => {
+const CollectionCard = ({ data }:Props) => {
   const classes = useStyle();
   const { _id, collection_logo, collection_name, collection_description } = data;
   const onClickCard = () => {
@@ -30,4 +30,4 @@ const CollectoinCard = ({ data }:Props) => {
   );
 };
 
-export default CollectoinCard;
+export default CollectionCard;

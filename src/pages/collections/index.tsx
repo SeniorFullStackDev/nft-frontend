@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Grid, Card, CardContent, Button, Typography, CardActions } from '@material-ui/core';
 import CustomButton from 'components/Buttons/CustomButton';
 import CreateCollectionDialog from 'components/CreateCollectionDialog';
-import CollectoinCard from 'components/CollectoinCard';
+import CollectionCard from 'components/CollectionCard';
 import useWallet from 'redux/wallet/wallet.hook';
 import { useStyle } from './style';
 
@@ -34,7 +34,7 @@ const CollectionPage = () => {
           </Card>
         </Grid>
         {
-          wallet.collections.map((item, index) => <Grid item><CollectoinCard data={item} /></Grid>)
+          wallet.collections.map((item, index) => <Grid item><CollectionCard data={item} /></Grid>)
         }
 
         <CreateCollectionDialog open={openDialog} onClose={() => { setOpenDialog(false); }} />
